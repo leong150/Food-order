@@ -1,0 +1,22 @@
+{% extends "myorder/base.html" %}
+{% block main_content %}
+
+<h1>New Menu</h1>
+
+<form action="{% url 'add' %}" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <label> Name: </label><br>
+    <input type="text" name="name" required/> <br><br>
+
+    <label> Price: </label> <br>
+    <input type="number" name="price" step="0.01" min="0" required/> <br><br>
+
+    <label> Description: </label><br>
+    <input type="text" name="description" size="100" required/> <br><br>
+
+    <label> Select an image: </label>
+    <input type="file" name="image" accept="image/*" required/> <br><br>
+    <input type="submit" value="Save"/>
+</form>
+
+{% endblock %}

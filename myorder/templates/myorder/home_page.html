@@ -1,0 +1,13 @@
+{% extends "myorder/base.html" %}
+{% block main_content %}
+
+<h1> Main Menu </h1> <a href = 'new' > Add new menu </a>
+    <ol>
+        {% for menu in latest_menu %}
+            <li><a href = '{{menu.id}}'>{{menu.name}}</a> - RM{{menu.price}}</li>
+            <dt>{{menu.description}} </dt><br>
+            <dt><img src="{{menu.image.url}}" width ='300'></dt><br>
+        {% endfor %}
+    </ol>
+
+{% endblock %}
