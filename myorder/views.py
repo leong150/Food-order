@@ -2,9 +2,8 @@ from http.client import HTTPResponse
 from multiprocessing import context
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
-from .models import menu
+from .models import menu, menuform
 from django.urls import reverse
-from .forms import menuform
 
 # Create your views here.
 
@@ -19,15 +18,16 @@ def food_detail(request, menu_id):
 
 def edit(request, menu_id):
     latest_menu = menu.objects.get(pk=menu_id)
-    latest_menu.name = request.POST.get("name")
-    latest_menu.price = request.POST.get("price")
-    latest_menu.description = request.POST.get("description")
-    if request.POST.get("image") == '':
-        pass
+    form = menuform(request.POST, request.FILES, instance=latest_menu)
+
+    if form.is_valid():
+        menu.objects.get(pk=menu_id).image.delete()
+        form.save()
+        return HttpResponseRedirect(reverse('home'))
+
     else:
-        latest_menu.image = (request.POST.get("image"), request.FILES.get("image"))
-    latest_menu.save()
-    return HttpResponseRedirect(reverse('home'))
+        print("error")
+        return HttpResponseRedirect(reverse('food_detail', args=menu_id))
 
 def new_food_detail(request):
     return render(request, 'myorder/add_food.html')
