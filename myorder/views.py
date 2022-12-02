@@ -21,7 +21,8 @@ def edit(request, menu_id):
     form = menuform(request.POST, request.FILES, instance=latest_menu)
 
     if form.is_valid():
-        menu.objects.get(pk=menu_id).image.delete()
+        if form.files != {}:
+            menu.objects.get(pk=menu_id).image.delete()
         form.save()
         return HttpResponseRedirect(reverse('home'))
 
