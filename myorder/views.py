@@ -34,6 +34,11 @@ def new_food_detail(request):
     return render(request, 'myorder/add_food.html')
 
 def add(request):
-    new_menu = menu(name=request.POST.get("name"), price=request.POST.get("price"), description=request.POST.get("description"), image=request.POST.get("image"))
-    new_menu.save()
-    return HttpResponseRedirect(reverse('home'))
+    form = menuform(request.POST, request.FILES)
+    if form.is_valid():
+        form.save()
+        return HttpResponseRedirect(reverse('home'))
+
+    else:
+        print("error")
+        return render(request, 'myorder/add_food.html')
