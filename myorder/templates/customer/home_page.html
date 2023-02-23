@@ -1,0 +1,14 @@
+{% extends "customer/base.html" %}
+{% block content %}
+
+<h1> Main Menu </h1>
+<p> <a href = "{% url 'see_cart' current_cart.order_no %}" > Cart </p>
+
+    <ol>
+        {% for menu in latest_menu %}
+            <li><a href='{{menu.id}}'>{{menu.name}}</a> - RM{{menu.price}}</li>
+            <dt><img src="{{menu.image.url}}" width ='100'></dt><br>
+        {% endfor %}
+    </ol>
+
+{% endblock %}  

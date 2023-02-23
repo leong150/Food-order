@@ -1,0 +1,23 @@
+{% extends "restaurant/base.html" %}
+{% block main_content %}
+
+<h1>Change Details</h1>
+
+<form action="{% url 'edit' current_menu.id %}" method="post" enctype="multipart/form-data" >
+    {% csrf_token %}
+    <label for="name{{current_menu.id}}"> Name: </label><br>
+    <input type="text" name="name" id="name{{current_menu.id}}" value="{{current_menu.name}}" required/> <br><br>
+
+    <label for="price{{current_menu.id}}"> Price: </label> <br>
+    <input type="number" name="price" id="price{{current_menu.id}}" step="0.05" min="0" value="{{current_menu.price}}" required/> <br><br>
+
+    <label for="description{{current_menu.id}}"> Description: </label><br>
+    <input type="text" name="description" id="description{{current_menu.id}}" size="100" value="{{current_menu.description}}" required/> <br><br>
+
+    Current image: <br><img src="{{current_menu.image.url}}" width='400'><br>
+    <label for="image{{current_menu.id}}"> Select an image: </label>
+    <input type="file" name="image" id="image{{current_menu.id}}" accept="image/*" /> <br><br>
+    <input type="submit" value="Save"/>
+</form>
+
+{% endblock %}

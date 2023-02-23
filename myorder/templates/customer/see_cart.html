@@ -1,0 +1,18 @@
+{% extends "customer/base.html" %}
+{% block content %}
+
+<h1> Cart </h1>
+
+<ol>
+    {% for cart_item in current_order %}
+        <li>{{cart_item.name}} &nbsp; x{{cart_item.qty}} = RM {{cart_item.total_cost}} </li><br>
+    {% endfor %}
+</ol>
+
+<p>Total: RM {{cart.sum}}</p>
+
+<p><a href = "{% url 'customer_home' %}"> Back to menu </p>
+
+<p><a href = "{% url 'place_order' cart.order_no %}"> Place order </p>
+
+{% endblock %}
