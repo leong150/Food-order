@@ -1,7 +1,9 @@
 {% extends "restaurant/base.html" %}
 {% block main_content %}
 
-<h1> Main Menu </h1> <a href = 'new' > Add new menu </a>
+<h1> Main Menu </h1> 
+<h3> <a href = 'order' > View order </a> </h2>
+<a href = 'new' > Add new menu </a>
 
     <p>
     {% if user.is_authenticated %}

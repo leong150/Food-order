@@ -1,18 +1,18 @@
 {% extends "customer/base.html" %}
 {% block content %}
 
-<h1>{{current_menu.name}} </h1>
+<h1>{{selected_food.menu.name}} </h1>
     
-<p><img src="{{current_menu.image.url}}" width='400'> </p> 
-<p>{{current_menu.description}} </p>
-<p> Price: RM {{current_menu.price}}</p>
+<p><img src="{{selected_food.menu.image.url}}" width='400'> </p> 
+<p>{{selected_food.menu.description}} </p>
+<p> Price: RM {{selected_food.menu.price}}</p>
 
-<form action="{% url 'addtocart' current_menu.id %}" method="post" oninput="x.value=parseInt(qty.value)*{{current_menu.price}}">
+<form action="{% url 'addtocart' selected_food.menu.id %}" method="post" oninput="x.value=parseInt(qty.value)*{{selected_food.menu.price}}">
     {% csrf_token %}
     <label for="qty"> x </label>
-    <input type="number" name="qty" id="qty" min="0" value="{{current_menu.qty}}" required/>
+    <input type="number" name="qty" id="qty" min="0" value="{{selected_food.qty}}" required/>
     = RM <output name="x" for="qty" ></output>
-    {% if current_menu.qty == 0 %}
+    {% if selected_food.qty == 0 %}
         <input type="submit" value="Add to cart"/>
     {% else %}
         <input type="submit" value="Update cart"/>

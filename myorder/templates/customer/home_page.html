@@ -2,7 +2,7 @@
 {% block content %}
 
 <h1> Main Menu </h1>
-<p> <a href = "{% url 'see_cart' current_cart.order_no %}" > Cart </p>
+<p> <a href = "{% url 'see_cart' %}" > Cart </p>
 
     <ol>
         {% for menu in latest_menu %}

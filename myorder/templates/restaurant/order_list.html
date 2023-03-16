@@ -1,0 +1,15 @@
+{% extends "restaurant/base.html" %}
+{% block main_content %}
+
+<h1> Order List </h1> 
+
+    <ol>
+        {% for order in all_order %}
+            <li><a href = '{{order.order_no}}'> Order No: {{order.order_no}} </a> (Status:{{order.get_status_display}}) </li>
+        {% endfor %}
+    </ol>
+
+<br>
+<h2> <a href = "{% url 'restaurant_home' %}" > Back <h2>
+
+{% endblock %}
